@@ -6,10 +6,13 @@ package com.ptitsyn;
  */
 public class AccountOperations {
 
-    public static void transfer(Account acc1, Account acc2, int transferMoney) {
+    public static boolean transfer(Account acc1, Account acc2, int transferMoney) {
+        if(acc1.withdraw(transferMoney)){
+            acc2.deposit(transferMoney);
+            return true;
+        }
+        return false;
 
-        acc1.withdraw(transferMoney);
-        acc2.deposit(transferMoney);
 
     }
 

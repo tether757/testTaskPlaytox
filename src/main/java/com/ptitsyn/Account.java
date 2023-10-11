@@ -41,20 +41,23 @@ public class Account {
             lock.unlock();
         }
     }
-    public void withdraw(int amount) {
+    public boolean withdraw(int amount) {
         lock.lock();
         try {
             if(this.getMoney() >= amount){
                 this.setMoney(getMoney() - amount);
-
                 logger.info("Снятие средств с аккаунта с id=" + this.getID() + " в размере " + amount);
+                return true;
             }
 
         } catch (Exception e) {
             logger.error( "При снятии средств с аккаунта с id=" + this.getID() + " произошла ошибка", e);
+            return false;
         } finally {
             lock.unlock();
+
         }
+        return false;
     }
 
 
